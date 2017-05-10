@@ -1,7 +1,12 @@
 //Dependencias
-const express = require('express');
-const logger  = require('morgan');
+const express    = require('express');
+const logger     = require('morgan');
+const mongoose   = require('mongoose');
+const bodyParser = require('body-parser');
 
+//Seta o Promise do mongoose para o global do js
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/apireceitas');
 
 const app     = express();
 
@@ -10,6 +15,7 @@ const usuarios = require('./routes/usuarios');
 
 //Middlewares
 app.use(logger('dev'));
+app.use(bodyParser.json());
 
 //Rotas
 app.use('/usuarios', usuarios);
@@ -34,7 +40,7 @@ app.use((req,res,next) => {
 			message: error.message
 		}
 	});
-	
+
 	console.error(err);
 });
 
