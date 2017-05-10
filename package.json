@@ -1,0 +1,30 @@
+{
+  "name": "receita_api",
+  "version": "1.0.0",
+  "description": "Pacote de informações da API de receitas",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaeldougllas/api_rest_nodejs_backend.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "API",
+    "Rest"
+  ],
+  "author": "Rafael Douglas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaeldougllas/api_rest_nodejs_backend/issues"
+  },
+  "homepage": "https://github.com/rafaeldougllas/api_rest_nodejs_backend#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongoose": "^4.9.8",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0"
+  }
+}
