@@ -3,6 +3,15 @@ const Usuario = require('../models/usuarios');
 
 //Exporta por meio de funçoes
 module.exports = {
+  //formato async/await (So funciona com node 7^)
+  index: async (req, res, next) =>{
+    try{
+      const usuarios = await Usuario.find({});
+      res.status(200).json(usuarios);
+    }catch(err){
+      next(err);
+    }
+  },
   //formato de Callbacks
   // index: (req, res, next) => {
   //     Usuario.find({}, (err, usuarios) =>{
@@ -18,15 +27,17 @@ module.exports = {
   //     });*/
   // },
   //formato de Promises
-  index: (req, res, next) =>{
-    Usuario.find({})
-      .then(usuarios => {
-        res.status(200).json(usuarios);
-      })
-      .catch(err => {
-        next(err);
-      });
-  },
+  // index: (req, res, next) =>{
+  //   Usuario.find({})
+  //     .then(usuarios => {
+  //       res.status(200).json(usuarios);
+  //     })
+  //     .catch(err => {
+  //       next(err);
+  //     });
+  // },
+
+
 
   //formato de Callbacks
   // novoUsuario: (req, res, next) => {
@@ -40,16 +51,26 @@ module.exports = {
   //   });
   // }
   //formato do Promises
-  novoUsuario: (req, res, next) => {
-    const novoUsuario = new Usuario(req.body);
-
-    novoUsuario.save()
-      .then(usuario => {
-        res.status(201).json(usuario);
-      })
-      .catch(err =>{
-        next(err);
-      });
+  // novoUsuario: (req, res, next) => {
+  //   const novoUsuario = new Usuario(req.body);
+  //
+  //   novoUsuario.save()
+  //     .then(usuario => {
+  //       res.status(201).json(usuario);
+  //     })
+  //     .catch(err =>{
+  //       next(err);
+  //     });
+  // }
+ //formato async/await (So funciona com node 7^)
+  novoUsuario: async (req, res, next) => {
+    try{
+      const novoUsuario = new usuario(req.body);
+      const usuario     = await novoUsuario.save();
+      res.status(201).json(usuario);
+    }catch(err){
+      next(err);
+    }
   }
 };
 
