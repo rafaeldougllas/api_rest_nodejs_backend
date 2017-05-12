@@ -71,6 +71,34 @@ module.exports = {
     }catch(err){
       next(err);
     }
+  },
+
+  getUsuario: async (req, res, next) => {
+
+      //const userId = req.params.usuarioId;
+      const {usuarioId} = req.params;
+      //Funçao do mongoose que busca pelo id
+      const usuario = await Usuario.findById(usuarioId);
+      res.status(200).json(usuario);
+
+  },
+  //Serve para atualizar todos os dados do usuario
+  replaceUsuario: async (req, res, next) => {
+    //Tem q ter todos os campos de Usuarui
+    const { usuarioId } = req.params;
+    const novoUsuario   = req.body;
+
+    const resultado = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
+    res.status(200).json({success: true});
+
+  },
+  //Serve para atualizar algum(ns) atributo(s) ou todos
+  updateUsuario: async (req, res, next) => {
+    const { usuarioId } = req.params;
+    const novoUsuario   = req.body;
+
+    const resultado = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
+    res.status(200).json({success: true});
   }
 };
 
