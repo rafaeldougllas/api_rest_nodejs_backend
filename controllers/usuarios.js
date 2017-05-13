@@ -106,7 +106,7 @@ module.exports = {
     const { usuarioId } = req.params;
     //funçao populate troca os ids das receitas pelos objetos de Receitas
     const usuario       = await Usuario.findById(usuarioId).populate('receitas');
-    console.log("Usuario ",usuario);
+    res.status(200).json(usuario.receitas);
   },
   //
   novaReceitaUsuario: async (req, res, next) => {
