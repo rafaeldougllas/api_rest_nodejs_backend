@@ -7,7 +7,7 @@ const usuariosSchema = new Schema({
   administrador: Number,
   receitas: [{
       type: Schema.Types.ObjectId,
-      ref: 'receitas'
+      ref: 'receita'
   }]
 });
 

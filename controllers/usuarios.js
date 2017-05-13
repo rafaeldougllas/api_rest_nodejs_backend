@@ -1,4 +1,5 @@
 const Usuario = require('../models/usuarios');
+const Receita = require('../models/receitas');
 
 
 //Exporta por meio de funçoes
@@ -65,7 +66,7 @@ module.exports = {
  //formato async/await (So funciona com node 7^)
   novoUsuario: async (req, res, next) => {
     try{
-      const novoUsuario = new usuario(req.body);
+      const novoUsuario = new Usuario(req.body);
       const usuario     = await novoUsuario.save();
       res.status(201).json(usuario);
     }catch(err){
@@ -78,7 +79,7 @@ module.exports = {
       //const userId = req.params.usuarioId;
       const {usuarioId} = req.params;
       //Funçao do mongoose que busca pelo id
-      const usuario = await Usuario.findById(usuarioId);
+      const usuario     = await Usuario.findById(usuarioId);
       res.status(200).json(usuario);
 
   },
@@ -88,7 +89,7 @@ module.exports = {
     const { usuarioId } = req.params;
     const novoUsuario   = req.body;
 
-    const resultado = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
+    const resultado     = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
     res.status(200).json({success: true});
 
   },
@@ -97,8 +98,34 @@ module.exports = {
     const { usuarioId } = req.params;
     const novoUsuario   = req.body;
 
-    const resultado = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
+    const resultado     = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
     res.status(200).json({success: true});
+  },
+  //Retorna todas as receitas de um usuario especifico
+  getReceitasDoUsuario: async (req, res, next) => {
+    const { usuarioId } = req.params;
+    //funçao populate troca os ids das receitas pelos objetos de Receitas
+    const usuario       = await Usuario.findById(usuarioId).populate('receitas');
+    console.log("Usuario ",usuario);
+  },
+  //
+  novaReceitaUsuario: async (req, res, next) => {
+    //Id do usuario enviado na url
+    const { usuarioId } = req.params;
+    //Cria uma nova Receita
+    const novaReceita   = new Receita(req.body);
+    //Recupera o usuario
+    const usuario       = await Usuario.findById(usuarioId);
+    //Assina a receita com o usuario que criou
+    novaReceita.usuario = usuario;
+    //Salva a receita
+    await novaReceita.save();
+    //Adiciona a receita ao array de receitas no usuario
+    usuario.receitas.push(novaReceita);
+    //Salva a receita no usuario
+    await usuario.save();
+    res.status(200).json(novaReceita);
+
   }
 };
 

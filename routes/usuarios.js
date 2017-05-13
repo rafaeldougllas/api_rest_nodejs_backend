@@ -14,6 +14,11 @@ router.route('/:usuarioId')
     .put(usuariosController.replaceUsuario)
     .patch(usuariosController.updateUsuario);
 
+router.route('/:usuarioId/receitas')
+    .get(usuariosController.getReceitasDoUsuario)
+    .post(usuariosController.novaReceitaUsuario);
+
+
 
 //A chamada acima é a mesma coisa que a abaixo
 // router.get('/', (req, res, next) => {
