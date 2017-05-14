@@ -71,7 +71,7 @@ module.exports = {
  //formato async/await (So funciona com node 7^)
   novoUsuario: async (req, res, next) => {
     try{
-      const novoUsuario = new Usuario(req.body);
+      const novoUsuario = new Usuario(req.value.body);//Sem validação, pegava o body com o  req.body
       const usuario     = await novoUsuario.save();
       res.status(201).json(usuario);
     }catch(err){
@@ -81,7 +81,7 @@ module.exports = {
 
   getUsuario: async (req, res, next) => {
       //Forma nova com o conteudo vindo da validação
-      const { usuarioId } = req.value.params;
+      const { usuarioId } = req.value.params;//Sem validação, pegava o usuarioId com o  req.params
       // //Forma antiga sem validação e chamada direto
       // //const userId = req.params.usuarioId;
       // const {usuarioId} = req.params;
@@ -93,8 +93,8 @@ module.exports = {
   //Serve para atualizar todos os dados do usuario
   replaceUsuario: async (req, res, next) => {
     //Tem q ter todos os campos de Usuarui
-    const { usuarioId } = req.params;
-    const novoUsuario   = req.body;
+    const { usuarioId } = req.value.params;//Sem validação, pegava o usuarioId com o  req.params
+    const novoUsuario   = req.value.body;//Sem validação, pegava o body com o  req.body
 
     const resultado     = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
     res.status(200).json({success: true});
@@ -102,15 +102,15 @@ module.exports = {
   },
   //Serve para atualizar algum(ns) atributo(s) ou todos
   updateUsuario: async (req, res, next) => {
-    const { usuarioId } = req.params;
-    const novoUsuario   = req.body;
+    const { usuarioId } = req.value.params;//Sem validação, pegava o usuarioId com o  req.params
+    const novoUsuario   = req.value.body; //Sem validação, pegava o body com o  req.body
 
     const resultado     = await Usuario.findByIdAndUpdate(usuarioId,novoUsuario);
     res.status(200).json({success: true});
   },
   //Retorna todas as receitas de um usuario especifico
   getReceitasDoUsuario: async (req, res, next) => {
-    const { usuarioId } = req.params;
+    const { usuarioId } = req.value.params;//Sem validação, pegava o body com o  req.params
     //funçao populate troca os ids das receitas pelos objetos de Receitas
     const usuario       = await Usuario.findById(usuarioId).populate('receitas');
     res.status(200).json(usuario.receitas);
@@ -118,9 +118,9 @@ module.exports = {
   //
   novaReceitaUsuario: async (req, res, next) => {
     //Id do usuario enviado na url
-    const { usuarioId } = req.params;
+    const { usuarioId } = req.value.params;
     //Cria uma nova Receita
-    const novaReceita   = new Receita(req.body);
+    const novaReceita   = new Receita(req.value.body);
     //Recupera o usuario
     const usuario       = await Usuario.findById(usuarioId);
     //Assina a receita com o usuario que criou

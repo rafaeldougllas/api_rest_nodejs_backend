@@ -5,22 +5,27 @@ const mongoose = require('mongoose');
 
 const usuariosController = require('../controllers/usuarios');
 
-const { validateParam, schemas } = require('../helpers/routerHelpers');
+const { validateParam, validateBody, schemas } = require('../helpers/routerHelpers');
 
 
 router.route('/')
   .get(usuariosController.index)
-  .post(usuariosController.novoUsuario);
+  .post(validateBody(schemas.usuariosSchema, 'usuarioId'), usuariosController.novoUsuario);
 
 router.route('/:usuarioId')
     //So executa a funçao usuariosController.getUsuario, se passar pela validação
     .get(validateParam(schemas.idSchema, 'usuarioId'),usuariosController.getUsuario)
-    .put(usuariosController.replaceUsuario)
-    .patch(usuariosController.updateUsuario);
+    .put([validateParam(schemas.idSchema,'usuarioId'),
+          validateBody(schemas.usuariosSchema)],
+          usuariosController.replaceUsuario)
+    .patch([validateParam(schemas.idSchema,'usuarioId'),
+            validateBody(schemas.usuariosOpcionalSchema)],usuariosController.updateUsuario);
 
 router.route('/:usuarioId/receitas')
-    .get(usuariosController.getReceitasDoUsuario)
-    .post(usuariosController.novaReceitaUsuario);
+    .get(validateParam(schemas.idSchema, 'usuarioId'), usuariosController.getReceitasDoUsuario)
+    .post([validateParam(schemas.idSchema, 'usuarioId'),
+           validateBody(schemas.receitasSchema)],
+           usuariosController.novaReceitaUsuario);
 
 
 
