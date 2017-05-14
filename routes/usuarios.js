@@ -3,14 +3,18 @@ const express = require('express');
 const router    = require('express-promise-router')();
 const mongoose = require('mongoose');
 
-
 const usuariosController = require('../controllers/usuarios');
+
+const { validateParam, schemas } = require('../helpers/routerHelpers');
+
+
 router.route('/')
   .get(usuariosController.index)
   .post(usuariosController.novoUsuario);
 
 router.route('/:usuarioId')
-    .get(usuariosController.getUsuario)
+    //So executa a funçao usuariosController.getUsuario, se passar pela validação
+    .get(validateParam(schemas.idSchema, 'usuarioId'),usuariosController.getUsuario)
     .put(usuariosController.replaceUsuario)
     .patch(usuariosController.updateUsuario);
 

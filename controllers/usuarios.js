@@ -1,6 +1,11 @@
 const Usuario = require('../models/usuarios');
 const Receita = require('../models/receitas');
 
+const Joi = require('joi');
+const idSchema = Joi.object().keys({
+  usuarioId: Joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+});
+
 
 //Exporta por meio de funçoes
 module.exports = {
@@ -75,9 +80,11 @@ module.exports = {
   },
 
   getUsuario: async (req, res, next) => {
-
-      //const userId = req.params.usuarioId;
-      const {usuarioId} = req.params;
+      //Forma nova com o conteudo vindo da validação
+      const { usuarioId } = req.value.params;
+      // //Forma antiga sem validação e chamada direto
+      // //const userId = req.params.usuarioId;
+      // const {usuarioId} = req.params;
       //Funçao do mongoose que busca pelo id
       const usuario     = await Usuario.findById(usuarioId);
       res.status(200).json(usuario);
