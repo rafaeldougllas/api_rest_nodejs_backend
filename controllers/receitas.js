@@ -45,5 +45,28 @@ module.exports = {
     const novaReceita   = req.value.body;
     const resultado     = await Receita.findByIdAndUpdate(receitaId,novaReceita);
     res.status(200).json({success:true});
+  },
+
+  deleteReceita: async(req, res, next) => {
+    const { receitaId } = req.value.params;
+
+    //recupera a receita
+    const receita = await Receita.findById(receitaId);
+    if(!receita){
+      return res.status(404).json({error : "Esta receita não existe!"});
+    }
+
+    const usuarioId = receita.usuario;
+    const usuario   = await Usuario.findById(usuarioId);
+
+    //Deleta a receita
+    await receita.remove();
+
+    //Retira essa receita do seu criador
+    usuario.receitas.pull(receita);
+    await usuario.save();
+
+    res.status(200).json({success : true});
+
   }
 }

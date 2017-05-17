@@ -22,5 +22,7 @@ router.route('/:receitaId')
   .patch([validateParam(schemas.idSchema,'receitaId'),
         validateBody(schemas.patchReceitasSchema)],
         ReceitasController.updateReceitas)
+  .delete(validateParam(schemas.idSchema,'receitaId'),
+          ReceitasController.deleteReceita);
 
 module.exports = router;
