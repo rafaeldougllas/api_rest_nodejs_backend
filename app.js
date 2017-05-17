@@ -12,6 +12,7 @@ const app     = express();
 
 //Rotas
 const usuarios = require('./routes/usuarios');
+const receitas = require('./routes/receitas');
 
 //Middlewares
 app.use(logger('dev'));
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 //Rotas
 app.use('/usuarios', usuarios);
+app.use('/receitas', receitas);
 
 
 //Captura erros 404 e coloca para o manipulador de erros resolver

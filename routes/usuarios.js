@@ -19,12 +19,14 @@ router.route('/:usuarioId')
           validateBody(schemas.usuariosSchema)],
           usuariosController.replaceUsuario)
     .patch([validateParam(schemas.idSchema,'usuarioId'),
-            validateBody(schemas.usuariosOpcionalSchema)],usuariosController.updateUsuario);
+            validateBody(schemas.usuariosOpcionalSchema)],
+            usuariosController.updateUsuario);
 
 router.route('/:usuarioId/receitas')
-    .get(validateParam(schemas.idSchema, 'usuarioId'), usuariosController.getReceitasDoUsuario)
+    .get(validateParam(schemas.idSchema, 'usuarioId'),
+         usuariosController.getReceitasDoUsuario)
     .post([validateParam(schemas.idSchema, 'usuarioId'),
-           validateBody(schemas.receitasSchema)],
+           validateBody(schemas.usuarioReceitasSchema)],
            usuariosController.novaReceitaUsuario);
 
 

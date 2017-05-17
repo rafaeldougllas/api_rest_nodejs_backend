@@ -53,13 +53,38 @@ module.exports = {
          dataCriacao: Joi.string(),
          administrador: Joi.number()
        }),
-
-       receitasSchema: Joi.object().keys({
+       //(PUT)Usada para atualizar todos os campos de
+       usuarioReceitasSchema: Joi.object().keys({
          titulo: Joi.string().required(),
          ingredientes: Joi.string().required(),
          modoDePreparo: Joi.string().required(),
          dataCriacao: Joi.string().required(),
          custo: Joi.string().required()
+       }),
+
+       receitasSchema: Joi.object().keys({
+         usuarioId:Joi.string().regex(/^[0-9a-fA-F]{24}$/).required(),
+         titulo: Joi.string().required(),
+         ingredientes: Joi.string().required(),
+         modoDePreparo: Joi.string().required(),
+         dataCriacao: Joi.string().required(),
+         custo: Joi.string().required()
+       }),
+       //put
+       putReceitasSchema: Joi.object().keys({
+         titulo: Joi.string().required(),
+         ingredientes: Joi.string().required(),
+         modoDePreparo: Joi.string().required(),
+         dataCriacao: Joi.string().required(),
+         custo: Joi.string().required()
+       }),
+
+       patchReceitasSchema: Joi.object().keys({
+         titulo: Joi.string(),
+         ingredientes: Joi.string(),
+         modoDePreparo: Joi.string(),
+         dataCriacao: Joi.string(),
+         custo: Joi.string()
        }),
 
        //Verifica se o id passado possui os padrões do mongodb:
