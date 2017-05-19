@@ -14,6 +14,8 @@ const app     = express();
 const usuarios = require('./routes/usuarios');
 const receitas = require('./routes/receitas');
 
+const usuarios2 = require('./routes/usuarios2');
+
 //Middlewares
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -21,7 +23,7 @@ app.use(bodyParser.json());
 //Rotas
 app.use('/usuarios', usuarios);
 app.use('/receitas', receitas);
-
+app.use('/usuarios2', usuarios2);
 
 //Captura erros 404 e coloca para o manipulador de erros resolver
 app.use((req,res,next) => {
