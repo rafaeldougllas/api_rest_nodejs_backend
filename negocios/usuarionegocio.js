@@ -18,7 +18,6 @@ usuarioNegocio.prototype.getAll = async (req, res, next) =>{
 };
 
 
-
 usuarioNegocio.prototype.novoUsuario = async (req, res, next) =>{
   try{
     console.log('novoUsuario');
