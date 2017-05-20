@@ -1,5 +1,5 @@
-const repositorio = require('../repositorio/ReceitaRepositorio');
-const receitaRepositorio = new repositorio();
+const Persistencia = require('../persistencia/ReceitaPersistencia');
+const receitaPersistencia = new Persistencia();
 
 function receitaNegocio(){
 
@@ -9,7 +9,7 @@ function receitaNegocio(){
 receitaNegocio.prototype.getAll = async (req, res, next) =>{
   try{
     console.log('Receita getAll');
-    const receita = await receitaRepositorio.getAll();
+    const receita = await receitaPersistencia.getAll();
     res.status(200).json(receita);
   }catch(err){
     next(err);
@@ -19,7 +19,10 @@ receitaNegocio.prototype.getAll = async (req, res, next) =>{
 
 receitaNegocio.prototype.novaReceita = async (req, res, next) =>{
   try{
-
+    console.log('Receita NovaReceita');
+    var novaReceita   = req.value.body;
+    const receita = await receitaPersistencia.novaReceita(novaReceita);
+    res.status(200).json(receita);
   }catch(err){
     next(err);
   }
@@ -30,7 +33,7 @@ receitaNegocio.prototype.getReceita = async (req, res, next) =>{
   try{
     console.log('getReceita');
     var receitaId = req.value.params.receitaId;
-    var receita = await receitaRepositorio.getReceita(receitaId);
+    var receita = await receitaPersistencia.getReceita(receitaId);
     res.status(200).json(receita);
   }catch(err){
     next(err);
@@ -44,7 +47,7 @@ receitaNegocio.prototype.replaceReceitas = async (req, res, next) =>{
     var { receitaId } = req.value.params;
     var novaReceita   = req.value.body;
 
-    var resultado = await receitaRepositorio.replaceReceitas(receitaId, novaReceita);
+    var resultado = await receitaPersistencia.replaceReceitas(receitaId, novaReceita);
     res.status(200).json({success: true});
 
   }catch(err){
@@ -59,7 +62,7 @@ receitaNegocio.prototype.updateReceitas = async (req, res, next) =>{
     var { receitaId } = req.value.params;
     var novaReceita   = req.value.body;
 
-    var resultado = await receitaRepositorio.updateReceitas(receitaId, novaReceita);
+    var resultado = await receitaPersistencia.updateReceitas(receitaId, novaReceita);
     res.status(200).json({success: true});
 
   }catch(err){
@@ -73,7 +76,7 @@ receitaNegocio.prototype.deleteReceita = async (req, res, next) =>{
     console.log('deleteReceita');
     var { receitaId } = req.value.params;
 
-    var resultado = await receitaRepositorio.deleteReceita(receitaId);
+    var resultado = await receitaPersistencia.deleteReceita(receitaId);
 
     if(resultado){
       res.status(200).json({success: true});
