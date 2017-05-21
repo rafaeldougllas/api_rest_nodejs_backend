@@ -1,13 +1,13 @@
 const Usuario = require('../models/usuarios');
 const Receita = require('../models/receitas');
 
-function UsuarioRepositorio(){
+function UsuarioPersistencia(){
 
 };
 
 
 
-UsuarioRepositorio.prototype.getAll = async function(){
+UsuarioPersistencia.prototype.getAll = async function(){
   //Traz Todos
   var usuarios =  await Usuario.find({}).populate('receitas');
   return usuarios;
@@ -16,7 +16,7 @@ UsuarioRepositorio.prototype.getAll = async function(){
 
 
 
-UsuarioRepositorio.prototype.novoUsuario = async function(usuario){
+UsuarioPersistencia.prototype.novoUsuario = async function(usuario){
   //Cria Novo Usuario
   const novoUsuario = new Usuario(usuario);
   var usuario = await novoUsuario.save();
@@ -26,7 +26,7 @@ UsuarioRepositorio.prototype.novoUsuario = async function(usuario){
 
 
 
-UsuarioRepositorio.prototype.getUsuario = async function(usuarioId){
+UsuarioPersistencia.prototype.getUsuario = async function(usuarioId){
   //Carrega usuário pelo Id
   var usuario = await Usuario.findById(usuarioId);
   return usuario;
@@ -35,7 +35,7 @@ UsuarioRepositorio.prototype.getUsuario = async function(usuarioId){
 
 
 
-UsuarioRepositorio.prototype.replaceUsuario = async function(usuarioId, usuario){
+UsuarioPersistencia.prototype.replaceUsuario = async function(usuarioId, usuario){
   //Atualiza Usuario (Todos Campos)
   const resultado     = await Usuario.findByIdAndUpdate(usuarioId, usuario);
   return resultado;
@@ -44,7 +44,7 @@ UsuarioRepositorio.prototype.replaceUsuario = async function(usuarioId, usuario)
 
 
 
-UsuarioRepositorio.prototype.updateUsuario = async function(usuarioId, usuario){
+UsuarioPersistencia.prototype.updateUsuario = async function(usuarioId, usuario){
   //Atualiza Usuario (Campos específicos)
   const resultado     = await Usuario.findByIdAndUpdate(usuarioId, usuario);
   return resultado;
@@ -53,7 +53,7 @@ UsuarioRepositorio.prototype.updateUsuario = async function(usuarioId, usuario){
 
 
 
-UsuarioRepositorio.prototype.getReceitasDoUsuario = async function(usuarioId){
+UsuarioPersistencia.prototype.getReceitasDoUsuario = async function(usuarioId){
   //Carrega Receitas do Usuario
   var usuario = await Usuario.findById(usuarioId).populate('receitas');
   return usuario;
@@ -62,7 +62,7 @@ UsuarioRepositorio.prototype.getReceitasDoUsuario = async function(usuarioId){
 
 
 
-UsuarioRepositorio.prototype.novaReceitaUsuario = async function(usuarioId, novaReceita){
+UsuarioPersistencia.prototype.novaReceitaUsuario = async function(usuarioId, novaReceita){
   //Cria uma nova Receita
   var novaReceita   = new Receita(novaReceita);
   //Recupera o usuario
@@ -82,4 +82,4 @@ UsuarioRepositorio.prototype.novaReceitaUsuario = async function(usuarioId, nova
 
 
 
-module.exports = UsuarioRepositorio;
+module.exports = UsuarioPersistencia;

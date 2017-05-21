@@ -1,28 +1,29 @@
 const router = require('express-promise-router')();
 
-const ReceitasController = new require('../controllers/receitas');
+const Negocio = require('../negocios/receitaNegocio');
+const receitaNegocio = new Negocio();
 
 const {
   validateBody,
   validateParam,
   schemas
-} = require('../helpers/routerHelpers');
+} = require('../controller/controller');
 
 router.route('/')
-  .get(ReceitasController.index)
+  .get(receitaNegocio.getAll)
   .post(validateBody(schemas.receitasSchema),
-        ReceitasController.novaReceita);
+        receitaNegocio.novaReceita);
 
 router.route('/:receitaId')
   .get(validateParam(schemas.idSchema,'receitaId'),
-       ReceitasController.getReceita)
+       receitaNegocio.getReceita)
   .put([validateParam(schemas.idSchema,'receitaId'),
        validateBody(schemas.putReceitasSchema)],
-       ReceitasController.replaceReceitas)
+       receitaNegocio.replaceReceitas)
   .patch([validateParam(schemas.idSchema,'receitaId'),
         validateBody(schemas.patchReceitasSchema)],
-        ReceitasController.updateReceitas)
+        receitaNegocio.updateReceitas)
   .delete(validateParam(schemas.idSchema,'receitaId'),
-          ReceitasController.deleteReceita);
+          receitaNegocio.deleteReceita);
 
 module.exports = router;
