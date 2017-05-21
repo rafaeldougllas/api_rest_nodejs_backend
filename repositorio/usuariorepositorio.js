@@ -9,7 +9,7 @@ function UsuarioRepositorio(){
 
 UsuarioRepositorio.prototype.getAll = async function(){
   //Traz Todos
-  var usuarios =  await Usuario.find({});
+  var usuarios =  await Usuario.find({}).populate('receitas');
   return usuarios;
 };
 

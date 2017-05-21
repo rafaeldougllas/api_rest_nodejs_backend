@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="franklincbc.com.receitas.CadastroUsuarioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:id="@+id/cadastro_usuario_edt_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome Usuario"
+            android:inputType="textCapWords"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cadastro_usuario_chk_administrador"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Administrador" />
+
+            <Button
+                android:id="@+id/cadastro_usuario_btn_salvarUsu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:onClick="cadastro_usuario_btn_salvarOnClick"
+                android:text="Salvar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/cadastro_usuario_lstView_receita_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="Receitas do usuário"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_below="@+id/cadastro_usuario_lstView_receita_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cadastro_usuario_lst_receitas"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/cadastro_usuario_fabNovaReceita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/ic_add_black_24dp"
+            android:onClick="cadastro_usuario_fabNovaReceitaOnClick"
+            app:elevation="4dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
