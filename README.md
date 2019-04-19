@@ -10,20 +10,20 @@
 
 ## ENDPOINTS (return JSON)
 
-* GET /usuarios - Lista todos os usuários
-* POST /usuarios - Cria um novo usuário
-* GET /usuarios/:id - Retorna um usuário específico
-* PUT /usuarios/:id - Atualiza um usuário específico
-* PATCH /usuarios/:id - Atualiza um usuário específico por campo
-* DELETE /usuarios/:id - Remove um usuário específico
-* GET /usuarios/:id/receitas - Lista todas as receitas de um usuário
-* POST /usuarios/:id/receitas - Adiciona uma receita para um usuário
-* GET /receitas - Lista todas as receitas
-* POST /receitas - Cria uma nova receita
-* GET /receitas/:id - Retorna uma receita específica
-* PUT /receitas/:id - Atualiza uma receita específica
-* PATCH /receitas/:id - Atualiza campos de uma receita específica
-* DELETE /receitas/:id - Remove uma receita de um usuário específico
+* GET /usuarios - Lista todos os usuários (List all users)
+* POST /usuarios - Cria um novo usuário (Create a new user)
+* GET /usuarios/:id - Retorna um usuário específico (Get a specific user)
+* PUT /usuarios/:id - Atualiza um usuário específico (Update a specific user)
+* PATCH /usuarios/:id - Atualiza um usuário específico por campo (Update attributes from specific user)
+* DELETE /usuarios/:id - Remove um usuário específico (Remove a specific user)
+* GET /usuarios/:id/receitas - Lista todas as receitas de um usuário (List all recipes from a specific user)
+* POST /usuarios/:id/receitas - Adiciona uma receita para um usuário (Add a recipe to an user)
+* GET /receitas - Lista todas as receitas (List all recipes)
+* POST /receitas - Cria uma nova receita (Create a new recipe)
+* GET /receitas/:id - Retorna uma receita específica (Get a specific recipe)
+* PUT /receitas/:id - Atualiza uma receita específica (Update a specific recipe)
+* PATCH /receitas/:id - Atualiza campos de uma receita específica (Update attributes from specific recipe)
+* DELETE /receitas/:id - Remove uma receita de um usuário específico (Remove a recipe from an user)
 
 ## Contact
 * Rafael.dougllas@gmail.com <br>
